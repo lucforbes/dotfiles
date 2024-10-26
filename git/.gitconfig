@@ -1,0 +1,7 @@
+[user]
+	email = luc.h.forbes@protonmail.com
+	name = Luc Forbes
+[pull]
+	rebase = false
+[alias]
+	adog = log --all --decorate --oneline --graph
