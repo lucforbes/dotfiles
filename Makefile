@@ -13,10 +13,10 @@ vim/.vim:
 # delete symlinks and plugins
 .PHONY: clean
 clean:
-	rm -rf vim/.vim
-	find */ -mindepth 1 -maxdepth 1 -exec basename {} \; | xargs -d "\n" -I {} unlink $(HOME)/{}
+	rm -rf $(PLUGINS)
+	stow -D $(filter-out Makefile, $(wildcard *))
 
-# backup old dotfiles
+# move old dotfiles to backup
 .PHONY: backup
 backup:
 	export BACKUP=.backup_$$(date +"%F_%T") && \
