@@ -57,9 +57,9 @@ set expandtab
 set nowrap
 
 " set scroll offset
-set scrolloff=12
+set scrolloff=8
 set sidescroll=1
-set sidescrolloff=12
+set sidescrolloff=8
 " mouse scrolling
 set mouse=a
 
