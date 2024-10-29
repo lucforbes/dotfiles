@@ -1,9 +1,10 @@
 PLUGINS = vim/.vim
+PKGS = $(filter-out Makefile, $(wildcard *))
 
 # create symlinks and install plugins
 .PHONY: stow
 stow: $(PLUGINS)
-	stow $(filter-out Makefile, $(wildcard *))
+	stow $(PKGS)
 
 # install vim plugins
 vim/.vim:
@@ -14,7 +15,7 @@ vim/.vim:
 .PHONY: clean
 clean:
 	rm -rf $(PLUGINS)
-	stow -D $(filter-out Makefile, $(wildcard *))
+	stow -D $(PKGS)
 
 # move old dotfiles to backup
 .PHONY: backup
