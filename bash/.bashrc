@@ -119,3 +119,7 @@ fi
 # https://stackoverflow.com/a/61110604
 export DISPLAY=$(ip route list default | awk '{print $3}'):0
 export LIBGL_ALWAYS_INDIRECT=1
+
+# http://www.os161.org/resources/setup.html
+export OS161=$HOME/courses/cpen331/os161
+export PATH=$PATH:$OS161/tools/bin

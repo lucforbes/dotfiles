@@ -1,7 +1,13 @@
 [user]
-	email = luc.h.forbes@protonmail.com
-	name = Luc Forbes
+    email = luc.h.forbes@protonmail.com
+    name = Luc Forbes
+
 [pull]
-	rebase = false
+    rebase = false
+
 [alias]
-	adog = log --all --decorate --oneline --graph
+    view = log --all --decorate --oneline --graph
+
+[init]
+    defaultBranch = master
+
