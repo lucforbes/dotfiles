@@ -14,6 +14,12 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 " *********** START plugins ***********
+" indent guides
+Plugin 'Yggdroot/indentLine'
+let g:indentLine_color_term = 0
+let g:indentLine_char = '┋'
+
+" verilog/systemverilog support
 Plugin 'vhda/verilog_systemverilog.vim'
 " ************ END plugins ************
 
@@ -41,19 +47,41 @@ set number relativenumber
 " syntax highlighting
 syntax on
 
-" indentation
+" indent options
 set autoindent
-set tabstop=4
-set shiftwidth=4
+set softtabstop=4 " tab expansion size
+set shiftwidth=4  " tab character size
+set expandtab
+
+" disable line wrapping
+set nowrap
+
+" set scroll offset
+set scrolloff=8
+set sidescroll=1
+set sidescrolloff=8
+" mouse scrolling
+set mouse=a
 
 " highlight trailing whitespace
 " https://stackoverflow.com/a/48951029
-highlight RedundantSpaces ctermbg=red guibg=red
+hi RedundantSpaces ctermbg=red guibg=red
 match RedundantSpaces /\s\+$/
 
-" indent guides
-" https://stackoverflow.com/a/13737262
-" set list lcs=tab:\┆\
-" https://vi.stackexchange.com/a/6140
-" hi SpecialKey ctermfg=grey guifg=grey70
+" indent guides for tabs
+" https://github.com/Yggdroot/indentLine
+" set list lcs=tab:\|\ 
+" set list lcs=
+" hi SpecialKey ctermfg=black
 
+" status line colours
+hi StatusLine ctermbg=black ctermfg=blue
+hi StatusLineNC ctermbg=blue ctermfg=black
+
+" split bar config
+set fillchars+=vert:\ 
+hi VertSplit ctermfg=0 ctermbg=NONE cterm=NONE
+
+" hide ~ at end
+" https://vi.stackexchange.com/questions/28994/can-i-change-the-ugly-indicator-after-eol
+let &fillchars ..= ',eob: '
