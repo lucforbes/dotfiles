@@ -68,6 +68,10 @@ set mouse=a
 hi RedundantSpaces ctermbg=red guibg=red
 match RedundantSpaces /\s\+$/
 
+" hide ~ at end
+" https://vi.stackexchange.com/questions/28994/can-i-change-the-ugly-indicator-after-eol
+let &fillchars ..= ',eob: '
+
 " indent guides for tabs
 " https://github.com/Yggdroot/indentLine
 " set list lcs=tab:\|\ 
@@ -78,10 +82,14 @@ match RedundantSpaces /\s\+$/
 hi StatusLine ctermbg=black ctermfg=blue
 hi StatusLineNC ctermbg=blue ctermfg=black
 
-" split bar config
+" tab colours
+" https://stackoverflow.com/a/7238163
+hi TabLineFill ctermfg=black ctermbg=black
+hi TabLine ctermfg=blue ctermbg=black cterm=NONE
+hi TabLineSel ctermfg=black ctermbg=blue
+
+" hide split bars
 set fillchars+=vert:\ 
 hi VertSplit ctermfg=0 ctermbg=NONE cterm=NONE
 
-" hide ~ at end
-" https://vi.stackexchange.com/questions/28994/can-i-change-the-ugly-indicator-after-eol
-let &fillchars ..= ',eob: '
+" bold X
