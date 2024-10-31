@@ -120,4 +120,4 @@ fi
 export CSCOPE_DB=/home/luc/os161/src/cscope/cscope.out
 alias cs='$HOME/os161/src/cscope/gen_db.sh && cscope -df $HOME/os161/src/cscope/cscope.out'
 
-export PATH=/root/tools/sys161/bin:/root/tools/os161/bin:$PATH
+export PATH=$HOME/tools/sys161/bin:$HOME/tools/os161/bin:$PATH
