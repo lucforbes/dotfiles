@@ -116,8 +116,8 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# https://stackoverflow.com/a/61110604
-#export DISPLAY=$(ip route list default | awk '{print $3}'):0
-#export LIBGL_ALWAYS_INDIRECT=1
-
+# https://stackoverflow.com/questions/6450265/vim-cannot-connect-to-cscope-database
+export CSCOPE_DB=/home/luc/os161/src/cscope/cscope.out
 alias cs='$HOME/os161/src/cscope/gen_db.sh && cscope -df $HOME/os161/src/cscope/cscope.out'
+
+export PATH=$HOME/tools/sys161/bin:$HOME/tools/os161/bin:$PATH
