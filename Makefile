@@ -8,7 +8,7 @@ stow: $(PLUGINS)
 
 # install vim plugins
 vim/.vim:
-	git clone git@github.com:VundleVim/Vundle.vim.git $@/bundle/Vundle.vim
+	git clone https://github.com/VundleVim/Vundle.vim.git $@/bundle/Vundle.vim
 	vim +PluginInstall +qall
 
 # delete symlinks and plugins
