@@ -19,8 +19,8 @@ Plugin 'Yggdroot/indentLine'
 let g:indentLine_color_term = 0
 let g:indentLine_char = '┋'
 
-" verilog/systemverilog support
-Plugin 'vhda/verilog_systemverilog.vim'
+" cscope maps
+Plugin 'joe-skb7/cscope-maps'
 " ************ END plugins ************
 
 " All of your Plugins must be added before the following line
@@ -49,8 +49,8 @@ syntax on
 
 " indent options
 set autoindent
-set softtabstop=4 " tab expansion size
-set shiftwidth=4  " tab character size
+set softtabstop=8 " tab expansion size
+set shiftwidth=8  " tab character size
 set expandtab
 
 " disable line wrapping
@@ -130,3 +130,6 @@ function MyTabLabel(n)
   return bufname(buflist[winnr - 1])
 endfunction
 
+" cscope
+cs add $CSCOPE_DB
+set cscopetag
