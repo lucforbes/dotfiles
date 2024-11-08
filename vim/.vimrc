@@ -23,6 +23,9 @@ Plugin 'VundleVim/Vundle.vim'
 " verilog/systemverilog support
 Plugin 'vhda/verilog_systemverilog.vim'
 
+" autocomplete pairs
+Plugin 'Raimondi/delimitMate'
+
 " ************ END plugins ************
 
 " All of your Plugins must be added before the following line
@@ -48,6 +51,7 @@ set number relativenumber
 
 " syntax highlighting
 syntax on
+runtime macros/matchit.vim
 
 " better line navigation
 map j gj
@@ -88,6 +92,7 @@ let &fillchars ..= ',eob: '
 set cursorline
 set cursorcolumn
 hi cursorline ctermbg=black cterm=NONE
+set cursorlineopt=both
 hi CursorLineNR ctermbg=black cterm=NONE
 hi cursorcolumn ctermbg=black
 
