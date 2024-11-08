@@ -14,6 +14,7 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 " *********** START plugins ***********
+
 " indent guides
 Plugin 'Yggdroot/indentLine'
 let g:indentLine_color_term = 0
@@ -21,6 +22,7 @@ let g:indentLine_char = '┋'
 
 " verilog/systemverilog support
 Plugin 'vhda/verilog_systemverilog.vim'
+
 " ************ END plugins ************
 
 " All of your Plugins must be added before the following line
@@ -77,6 +79,13 @@ let &fillchars ..= ',eob: '
 " set list lcs=tab:\|\ 
 " set list lcs=
 " hi SpecialKey ctermfg=black
+
+" cursor highlighting
+set cursorline
+set cursorcolumn
+hi cursorline ctermbg=black cterm=NONE
+hi CursorLineNR ctermbg=black cterm=NONE
+hi cursorcolumn ctermbg=black
 
 " status line colours
 hi StatusLine ctermbg=black ctermfg=blue
