@@ -16,9 +16,9 @@ Plugin 'VundleVim/Vundle.vim'
 " *********** START plugins ***********
 
 " indent guides
-Plugin 'Yggdroot/indentLine'
-let g:indentLine_color_term = 0
-let g:indentLine_char = '┋'
+"Plugin 'Yggdroot/indentLine'
+"let g:indentLine_color_term = 0
+"let g:indentLine_char = '┋'
 
 " verilog/systemverilog support
 Plugin 'vhda/verilog_systemverilog.vim'
