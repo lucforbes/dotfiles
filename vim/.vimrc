@@ -49,6 +49,10 @@ set number relativenumber
 " syntax highlighting
 syntax on
 
+" better line navigation
+map j gj
+map k gk
+
 " indent options
 set autoindent
 set softtabstop=4 " tab expansion size
