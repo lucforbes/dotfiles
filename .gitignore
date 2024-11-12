@@ -1,5 +1,3 @@
-# vim plugins
-.vim/
-
-# backups
+vim/.vim/bundle
+tmux/.tmux/plugins
 .backup_*/

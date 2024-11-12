@@ -1,104 +1,43 @@
-" ==========================================================================================
-" START vundle init - https://github.com/VundleVim/Vundle.vim
-" ==========================================================================================
-set nocompatible              " be iMproved, required
-filetype off                  " required
-
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-
-" *********** START plugins ***********
-
-" indent guides
-"Plugin 'Yggdroot/indentLine'
-"let g:indentLine_color_term = 0
-"let g:indentLine_char = '┋'
-
-" verilog/systemverilog support
-Plugin 'vhda/verilog_systemverilog.vim'
-
-" autocomplete pairs
-Plugin 'Raimondi/delimitMate'
-
-" ************ END plugins ************
-
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
-" ==========================================================================================
-" END vundle init
-" ==========================================================================================
+source ~/.vim/plugins.vim
+source ~/.vim/theme.vim
+source ~/.vim/behaviour.vim
 
 " line numbering
 set number relativenumber
 
 " syntax highlighting
 syntax on
-runtime macros/matchit.vim
-
-" better line navigation
-map j gj
-map k gk
-
-" indent options
-set autoindent
-set softtabstop=4 " tab expansion size
-set shiftwidth=4  " tab character size
-set expandtab
 
 " disable line wrapping
 set nowrap
 
-" set scroll offset
-set scrolloff=8
-set sidescroll=1
-set sidescrolloff=8
-" mouse scrolling
-set mouse=a
-
-" highlight trailing whitespace
-" https://stackoverflow.com/a/48951029
+" highlight trailing whitespace (https://stackoverflow.com/a/48951029)
 hi RedundantSpaces ctermbg=red guibg=red
-match RedundantSpaces /\s\+$/
+match RedundantSpaces /\s\+$/ 
 
-" hide ~ at end
-" https://vi.stackexchange.com/questions/28994/can-i-change-the-ugly-indicator-after-eol
+" hide ~ at end (https://vi.stackexchange.com/questions/28994/can-i-change-the-ugly-indicator-after-eol)
 let &fillchars ..= ',eob: '
 
-" indent guides for tabs
-" https://github.com/Yggdroot/indentLine
-" set list lcs=tab:\|\ 
-" set list lcs=
-" hi SpecialKey ctermfg=black
-
 " cursor highlighting
-set cursorline
-set cursorcolumn
+augroup CursorLineColumn
+    au!
+    au VimEnter * setlocal cursorline
+    au VimEnter * setlocal cursorcolumn
+    au WinEnter * setlocal cursorline
+    au WinEnter * setlocal cursorcolumn
+    au BufWinEnter * setlocal cursorline
+    au BufWinEnter * setlocal cursorcolumn
+    au WinLeave * setlocal nocursorline
+    au WinLeave * setlocal nocursorcolumn
+augroup END
 hi cursorline ctermbg=black cterm=NONE
 set cursorlineopt=both
 hi CursorLineNR ctermbg=black cterm=NONE
 hi cursorcolumn ctermbg=black
 
 " status line colours
-hi StatusLine ctermbg=black ctermfg=blue
-hi StatusLineNC ctermbg=blue ctermfg=black
+"autocmd vimenter * hi StatusLine ctermbg=black ctermfg=blue
+"autocmd vimenter * hi StatusLineNC ctermbg=blue ctermfg=black
 
 " tab colours
 " https://stackoverflow.com/a/7238163
@@ -108,7 +47,7 @@ hi TabLineSel ctermfg=black ctermbg=blue
 
 " hide split bars
 set fillchars+=vert:\ 
-hi VertSplit ctermfg=0 ctermbg=NONE cterm=NONE
+"hi VertSplit ctermfg=0 ctermbg=NONE cterm=NONE
 
 " customise tab X line
 " see :h setting-tabline
@@ -148,3 +87,11 @@ function MyTabLabel(n)
   return bufname(buflist[winnr - 1])
 endfunction
 
+" file exploration menu settings
+let g:netrw_banner = 0        " remove directions at top of file listing
+let g:netrw_liststyle=3       " tree style listing
+let g:netrw_browse_split = 3  " split horizontal
+let g:netrw_altv = 1
+let g:netrw_winsize=25        " width of window
+let g:netrw_preview=1
+augroup ProjectDrawer autocmd!  autocmd VimEnter * :Vexplore augroup END

@@ -1,20 +1,28 @@
-PLUGINS = vim/.vim
 PKGS = $(filter-out Makefile, $(wildcard *))
 
 # create symlinks and install plugins
 .PHONY: stow
-stow: $(PLUGINS)
+stow: vim/.vim/bundle/Vundle.vim tmux/.tmux/plugins/tpm zsh/.oh-my-zsh
 	stow $(PKGS)
 
-# install vim plugins
-vim/.vim:
-	git clone git@github.com:VundleVim/Vundle.vim.git $@/bundle/Vundle.vim
-	vim +PluginInstall +qall
+.PHONY: plug
+plug: vim/.vim/bundle/Vundle.vim tmux/.tmux/plugins/tpm zsh/.oh-my-zsh
 
-# delete symlinks and plugins
+# install Vundle
+vim/.vim/bundle/Vundle.vim:
+	git clone git@github.com:VundleVim/Vundle.vim.git $@
+
+# install tmux plugin manager
+tmux/.tmux/plugins/tpm:
+	git clone git@github.com:tmux-plugins/tpm.git $@
+
+# install oh-my-zsh
+zsh/.oh-my-zsh:
+	- sh -c "$$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+# delete symlinks
 .PHONY: clean
 clean:
-	rm -rf $(PLUGINS)
 	stow -D $(PKGS)
 
 # move old dotfiles to backup
