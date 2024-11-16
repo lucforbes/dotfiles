@@ -1,6 +1,68 @@
-source ~/.vim/plugins.vim
-source ~/.vim/theme.vim
-source ~/.vim/behaviour.vim
+" <plugins>------------------------------------------------------------------------------------
+
+" begin Vundle init
+set nocompatible
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
+
+" indent guides
+"Plugin 'Yggdroot/indentLine'
+"let g:indentLine_color_term = 0
+"let g:indentLine_char = '┋'
+
+" verilog/systemverilog support
+Plugin 'vhda/verilog_systemverilog.vim'
+
+" autocomplete pairs
+"Plugin 'Raimondi/delimitMate'
+
+" gruxbox extension
+Plugin 'nordtheme/vim'
+
+" status line
+"Plugin 'vim-airline/vim-airline' " too slow
+Plugin 'itchyny/lightline.vim'
+let g:lightline = {
+\   'colorscheme': 'nord'
+\   }
+
+" end Vundle init
+call vundle#end()
+filetype plugin indent on
+
+" <theme>---------------------------------------------------------------------------------------
+
+"" nord theme
+set background=dark
+colorscheme nord
+
+" <behaviour>-----------------------------------------------------------------------------------
+"
+" better line navigation
+map j gj
+map k gk
+
+" set scroll offset
+set scrolloff=8
+set sidescroll=1
+set sidescrolloff=8
+
+" mouse control
+set mouse=a
+
+" indent options
+set autoindent
+set softtabstop=4 " tab expansion size
+set shiftwidth=4  " tab character size
+set expandtab
+
+" restore cursor
+autocmd BufReadPost *
+  \ if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
+  \ |   exe "normal! g`\""
+  \ | endif
 
 " line numbering
 set number relativenumber
@@ -12,28 +74,21 @@ syntax on
 set nowrap
 
 " highlight trailing whitespace (https://stackoverflow.com/a/48951029)
-hi RedundantSpaces ctermbg=red guibg=red
+hi RedundantSpaces ctermbg=yellow guibg=yellow
 match RedundantSpaces /\s\+$/ 
 
-" hide ~ at end (https://vi.stackexchange.com/questions/28994/can-i-change-the-ugly-indicator-after-eol)
+" hide ~ characters after EOF (https://vi.stackexchange.com/questions/28994/can-i-change-the-ugly-indicator-after-eol)
 let &fillchars ..= ',eob: '
 
-" cursor highlighting
+" highlight cursor line
 augroup CursorLineColumn
     au!
     au VimEnter * setlocal cursorline
-    au VimEnter * setlocal cursorcolumn
     au WinEnter * setlocal cursorline
-    au WinEnter * setlocal cursorcolumn
     au BufWinEnter * setlocal cursorline
-    au BufWinEnter * setlocal cursorcolumn
     au WinLeave * setlocal nocursorline
-    au WinLeave * setlocal nocursorcolumn
 augroup END
 hi cursorline ctermbg=black cterm=NONE
-set cursorlineopt=both
-hi CursorLineNR ctermbg=black cterm=NONE
-hi cursorcolumn ctermbg=black
 
 " status line colours
 "autocmd vimenter * hi StatusLine ctermbg=black ctermfg=blue
@@ -41,13 +96,13 @@ hi cursorcolumn ctermbg=black
 
 " tab colours
 " https://stackoverflow.com/a/7238163
-hi TabLineFill ctermfg=black ctermbg=black
-hi TabLine ctermfg=blue ctermbg=black cterm=NONE
-hi TabLineSel ctermfg=black ctermbg=blue
+"hi TabLineFill ctermfg=black ctermbg=black
+"hi TabLine ctermfg=blue ctermbg=black cterm=NONE
+"hi TabLineSel ctermfg=black ctermbg=blue
 
 " hide split bars
 set fillchars+=vert:\ 
-"hi VertSplit ctermfg=0 ctermbg=NONE cterm=NONE
+hi VertSplit ctermfg=0 ctermbg=NONE cterm=NONE
 
 " customise tab X line
 " see :h setting-tabline
