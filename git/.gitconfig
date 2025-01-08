@@ -11,3 +11,7 @@
 [init]
     defaultBranch = master
 
+# https://jessehouwing.net/tips-tricks-git-under-wsl-and-windows/
+# Settings that are true for all repos on the WSL volumen go here:
+[core]
+	autocrlf = false

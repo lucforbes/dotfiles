@@ -7,25 +7,18 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
-" indent guides
-"Plugin 'Yggdroot/indentLine'
-"let g:indentLine_color_term = 0
-"let g:indentLine_char = '┋'
-
 " verilog/systemverilog support
 Plugin 'vhda/verilog_systemverilog.vim'
-
-" autocomplete pairs
-"Plugin 'Raimondi/delimitMate'
 
 " gruxbox extension
 Plugin 'nordtheme/vim'
 
 " status line
-"Plugin 'vim-airline/vim-airline' " too slow
 Plugin 'itchyny/lightline.vim'
 let g:lightline = {
-\   'colorscheme': 'nord'
+\   'colorscheme': 'nord',
+\   'separator': { 'left': '', 'right': '' },
+\   'subseparator': { 'left': '', 'right': '' }
 \   }
 
 " end Vundle init
@@ -39,7 +32,7 @@ set background=dark
 colorscheme nord
 
 " <behaviour>-----------------------------------------------------------------------------------
-"
+
 " better line navigation
 map j gj
 map k gk
@@ -93,6 +86,9 @@ hi cursorline ctermbg=black cterm=NONE
 " status line colours
 "autocmd vimenter * hi StatusLine ctermbg=black ctermfg=blue
 "autocmd vimenter * hi StatusLineNC ctermbg=blue ctermfg=black
+
+" always show status line
+set laststatus=2
 
 " tab colours
 " https://stackoverflow.com/a/7238163

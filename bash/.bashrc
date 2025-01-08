@@ -116,6 +116,8 @@ if ! shopt -oq posix; then
   fi
 fi
 
+# my additions start here
+
 # https://stackoverflow.com/a/61110604
 export DISPLAY=$(ip route list default | awk '{print $3}'):0
 export LIBGL_ALWAYS_INDIRECT=1
