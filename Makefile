@@ -24,7 +24,7 @@ clean:
 # move old dotfiles to backup
 .PHONY: backup
 backup:
-	export BACKUP=.backup_$$(date +"%F_%T") && \
+	export BACKUP=.backup/$$(date +"%F_%T") && \
 	mkdir -p $$BACKUP && \
 	find */ -mindepth 1 -maxdepth 1 -exec basename {} \; | xargs -d "\n" -I {} mv $(HOME)/{} $$BACKUP
 

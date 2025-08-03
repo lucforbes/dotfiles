@@ -67,7 +67,7 @@ syntax on
 set nowrap
 
 " highlight trailing whitespace (https://stackoverflow.com/a/48951029)
-hi RedundantSpaces ctermbg=yellow guibg=yellow
+hi RedundantSpaces ctermbg=0
 match RedundantSpaces /\s\+$/ 
 
 " hide ~ characters after EOF (https://vi.stackexchange.com/questions/28994/can-i-change-the-ugly-indicator-after-eol)
@@ -98,6 +98,7 @@ set laststatus=2
 
 " hide split bars
 set fillchars+=vert:\ 
+"hi VertSplit ctermfg=0 ctermbg=8 cterm=NONE
 hi VertSplit ctermfg=0 ctermbg=NONE cterm=NONE
 
 " customise tab X line
@@ -141,8 +142,25 @@ endfunction
 " file exploration menu settings
 let g:netrw_banner = 0        " remove directions at top of file listing
 let g:netrw_liststyle=3       " tree style listing
-let g:netrw_browse_split = 3  " split horizontal
-let g:netrw_altv = 1
-let g:netrw_winsize=25        " width of window
-let g:netrw_preview=1
-augroup ProjectDrawer autocmd!  autocmd VimEnter * :Vexplore augroup END
+"let g:netrw_browse_split = 3  " split horizontal
+"let g:netrw_altv = 0
+"let g:netrw_winsize=25        " width of window
+"let g:netrw_preview=1
+"augroup ProjectDrawer autocmd!  autocmd VimEnter * :Vexplore augroup END
+
+" https://www.johnhawthorn.com/2012/09/vi-escape-delays/
+set timeoutlen=1000 ttimeoutlen=10
+
+" WSL yank support
+" https://superuser.com/a/1557751
+let s:clip = '/mnt/c/Windows/System32/clip.exe'  " change this path according to your mount point
+if executable(s:clip)
+    augroup WSLYank
+        autocmd!
+        autocmd TextYankPost * if v:event.operator ==# 'y' | call system(s:clip, @0) | endif
+    augroup END
+endif
+
+" https://stackoverflow.com/a/22614431
+set splitright
+set splitbelow
