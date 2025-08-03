@@ -2,13 +2,11 @@ prompt_join_colour=0
 prompt_path_colour=blue
 prompt_git_colour=green
 prompt_time_colour=white
+prompt_git_colour=green
 
-autoload -Uz vcs_info
-precmd() { vcs_info }
-zstyle ':vcs_info:git:*' formats '%b '
 setopt PROMPT_SUBST
 
-print_prompt() {
+prompt() {
     echo "$(prompt_time)$(prompt_path)$(prompt_end)"
 }
 
@@ -25,7 +23,7 @@ prompt_end() {
 }
 
 prompt_time() {
-    echo "$(prompt_start)%B%F{$prompt_time_colour}%*%f%b"
+    echo "$(prompt_start)%B%F{$prompt_time_colour}%D %*%f%b"
 }
 
 prompt_path() {
@@ -43,7 +41,7 @@ prompt_path_git() {
 
 prompt_path_git_root() {
     local repo=$(basename $(git config --get remote.origin.url))
-    local branch=${vcs_info_msg_0_% }
+    local branch=$(git rev-parse --abbrev-ref HEAD)
     echo "$(prompt_join)%B%F{$prompt_git_colour}${repo%.git} -< $branch%f%b"
 }
 
@@ -54,4 +52,4 @@ prompt_path_git_path() {
     fi
 }
 
-PROMPT='$(print_prompt)'
+PROMPT='$(prompt)'

@@ -1,5 +1,5 @@
 alias v='vim'
 alias szsh='source ~/.zshrc'
-alias vzsh='v ~/.zshrc; szsh'
+alias vzsh='v ~/.zsh; szsh'
 alias print_colours='for code in {000..15}; do print -P -- "$code: %F{$code}Color%f"; done'
 alias ls='ls --color'
