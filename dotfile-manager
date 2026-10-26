@@ -1,0 +1,88 @@
+#! /usr/bin/env perl
+
+use strict;
+use warnings;
+
+use Getopt::Long;
+use File::Basename;
+use Cwd;
+use Data::Dumper;
+
+sub main
+{
+    my $args = &get_args();
+
+    chdir &dirname ( __FILE__ );
+
+    if    ( $args->{ stow   } ) { &stow   ( $args ); }
+    elsif ( $args->{ unstow } ) { &unstow ( $args ); }
+    elsif ( $args->{ help   } ) { &help   ( $args ); }
+}
+
+sub get_args
+{
+    my %args;
+
+    GetOptions
+    (
+        'stow'   => \$args{ stow   },
+        'unstow' => \$args{ unstow },
+        'help'   => \$args{ help   },
+
+        'debug'  => \$args{ debug  },
+        'dry'    => \$args{ dry    }
+    );
+
+    return \%args;
+}
+
+sub stow
+{
+    my $args = shift;
+    my $pkgs = &get_pkgs ( { Format => 'String' } );
+    my $cmd = "stow $pkgs";
+    return &run_cmd ( $cmd, $args );
+}
+
+sub unstow
+{
+    my $args = shift;
+    my $pkgs = &get_pkgs ( { Format => 'String' } );
+    my $cmd = "stow -D $pkgs";
+    return run_cmd ( $cmd, $args );
+}
+
+sub help
+{
+    die "(help) Unimplemented!\n $!";
+}
+
+sub run_cmd
+{
+    my ( $cmd, $args ) = @_;
+
+    if ( defined $args and $args->{debug} )
+    {
+        print "Directory: \"" . &getcwd() . "\". Command: \"$cmd\"\n";
+    }
+
+    return ( defined $args and $args->{dry} ) ? ( 0 ) : ( system $cmd );
+}
+
+sub get_pkgs
+{
+    my $args = shift;
+
+    my @pkgs = grep !/^(Makefile|dotfile-manager)$/, glob "*";
+
+    if ( defined $args and $args->{Format} eq 'String' )
+    {
+        return join ' ', @pkgs;
+    }
+    else
+    {
+        return \@pkgs;
+    }
+}
+
+&main();
